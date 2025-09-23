@@ -14,7 +14,7 @@ app = FastAPI()
 
 @app.get("/")
 def root():
-    return {"message": "Hello World"}
+    return {"message": "I'm alive!"}
 
 # Dependency
 
