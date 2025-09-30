@@ -3,6 +3,8 @@ from fastapi import FastAPI, Depends, HTTPException, Body
 from sqlalchemy.orm import Session
 from database import SessionLocal, engine, Base
 from models import User
+import uvicorn
+import os
 
 # Create tables
 Base.metadata.create_all(bind=engine)
@@ -81,3 +83,8 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
     db.delete(user)
     db.commit()
     return {"message": "User deleted successfully"}
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
